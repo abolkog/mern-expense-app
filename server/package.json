@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "MERN Stack Expense App Tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abolkog/mern-expense-app.git"
+  },
+  "author": "Khalid Elshafie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abolkog/mern-expense-app/issues"
+  },
+  "homepage": "https://github.com/abolkog/mern-expense-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.11",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
