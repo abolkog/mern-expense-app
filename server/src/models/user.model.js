@@ -36,5 +36,11 @@ UserSchema.methods.isPasswordMatch = function(password, hashed, callback) {
   });
 };
 
+UserSchema.methods.toJSON = function() {
+  const userObject = this.toObject();
+  delete userObject.password;
+  return userObject;
+};
+
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
