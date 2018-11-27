@@ -12,8 +12,8 @@ expenseController.get = async (req, res, next) => {
   const query = {
     owner: user._id,
     created: {
-        $gte: firstDay,
-        $lt: lastDay
+      $gte: firstDay,
+      $lt: lastDay
     }
   };
 
@@ -52,6 +52,15 @@ expenseController.update = async (req, res, next) => {
   const { amount, description, created } = req.body;
 
   try {
+    
+    const check = await Expense.findOne({ _id: expense_id });
+    if (!check.owner.equals(req.user._id)) {
+      const err = new Error('This exepense object does not belong to you!');
+      err.status = 401;
+      console.log('error');
+      throw err;
+    }
+
     const expense = await Expense.update(
       { _id: expense_id },
       { amount, description, created }
@@ -67,6 +76,14 @@ expenseController.update = async (req, res, next) => {
 
 expenseController.destroy = async (req, res, next) => {
   const expense_id = req.params.expense_id;
+  
+  const check = await Expense.findOne({ _id: expense_id });
+  if (!check.owner.equals(req.user._id)) {
+    const err = new Error('This exepense object does not belong to you!');
+    err.status = 401;
+    console.log('error');
+    throw err;
+  }
 
   try {
     await Expense.deleteOne({ _id: expense_id });
