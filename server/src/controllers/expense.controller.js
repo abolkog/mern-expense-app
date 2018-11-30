@@ -57,7 +57,6 @@ expenseController.update = async (req, res, next) => {
     if (!check.owner.equals(req.user._id)) {
       const err = new Error('This exepense object does not belong to you!');
       err.status = 401;
-      console.log('error');
       throw err;
     }
 
@@ -81,7 +80,6 @@ expenseController.destroy = async (req, res, next) => {
   if (!check.owner.equals(req.user._id)) {
     const err = new Error('This exepense object does not belong to you!');
     err.status = 401;
-    console.log('error');
     throw err;
   }
 
