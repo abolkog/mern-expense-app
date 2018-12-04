@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/abolkog/mern-expense-app/issues"
   },
-  "homepage": "https://github.com/abolkog/mern-expense-app#readme",
-  "dependencies": {
-    "formik": "^1.3.2"
-  }
+  "homepage": "https://github.com/abolkog/mern-expense-app#readme"
 }
