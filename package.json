@@ -1,21 +1,23 @@
 {
-    "name": "mern-expense-app",
-    "version": "1.0.0",
-    "description": "MERN Stack Expense App Tutorial",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "server": "npm run dev --prefix server",
-      "client": "npm start --prefix client"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/abolkog/mern-expense-app.git"
-    },
-    "author": "Khalid Elshafie",
-    "license": "MIT",
-    "bugs": {
-      "url": "https://github.com/abolkog/mern-expense-app/issues"
-    },
-    "homepage": "https://github.com/abolkog/mern-expense-app#readme"
+  "name": "mern-expense-app",
+  "version": "1.0.0",
+  "description": "MERN Stack Expense App Tutorial",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "npm run dev --prefix server",
+    "client": "npm start --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abolkog/mern-expense-app.git"
+  },
+  "author": "Khalid Elshafie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abolkog/mern-expense-app/issues"
+  },
+  "homepage": "https://github.com/abolkog/mern-expense-app#readme",
+  "dependencies": {
+    "formik": "^1.3.2"
   }
-  
+}
