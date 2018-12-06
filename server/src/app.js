@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const cors = require('cors');
 
 const v1 = require('./routes/v1');
 
@@ -23,6 +24,8 @@ mongoose.connection.on('error', (err) => {
 
 // ----------- Middlewares -----------//
 app.use(logger('dev'));
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

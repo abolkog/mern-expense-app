@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -89,6 +90,7 @@ class Signup extends Component {
             </div>
           )}
         />
+        <Link to='/login'>Have an account? Sign In</Link>
       </div>
     );
   }

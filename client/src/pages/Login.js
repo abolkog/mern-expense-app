@@ -1,17 +1,53 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import {
+  Button,
+  FormGroup,
+  Label,
+  Input,
+  FormFeedback,
+  Alert
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-class Login extends Component {
-  _handleFormSubmit(values) {
-    console.log(values);
+import { signIn } from '../actions';
+
+class LoginPage extends Component {
+  componentDidUpdate() {
+    const { error, isAuth } = this.props;
+    if (error && this.bag) {
+      this.bag.setSubmitting(false);
+    }
+
+    if (isAuth) {
+      this.props.history.push('/');
+    }
   }
+
+  _handleFormSubmit(values, bag) {
+    this.props.signIn(values);
+    this.bag = bag;
+  }
+
+  _renderErrorIfAny() {
+    const { error } = this.props;
+    if (error) {
+      return (
+        <Alert color='danger'>{error}</Alert>
+      );
+    }
+  }
+
   render() {
     return (
       <div style={{ padding: 20 }}>
         <h3>Sign in to your account</h3>
         <hr />
+
+        {this._renderErrorIfAny()}
+
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={this._handleFormSubmit.bind(this)}
@@ -73,9 +109,22 @@ class Login extends Component {
             </div>
           )}
         />
+        <Link to='/signup'>Do not have an account? Sign Up Now</Link>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ auth }) => {
+  return {
+    attempting: auth.attempting,
+    error: auth.error,
+    isAuth: auth.isAuth
+  };
+};
+
+const Login = connect(
+  mapStateToProps,
+  { signIn }
+)(LoginPage);
 export { Login };
