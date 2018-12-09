@@ -8,6 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
+import { onLodingSignIn } from './actions';
+
+store.dispatch(onLodingSignIn());
 
 ReactDOM.render(
   <BrowserRouter>
