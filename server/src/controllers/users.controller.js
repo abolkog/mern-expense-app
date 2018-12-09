@@ -61,4 +61,8 @@ userController.login = async (req, res, next) => {
     
 };
 
+userController.me = (req, res, next) => {
+    const { user } = req;
+    res.send({ user })
+}
 module.exports = userController;
