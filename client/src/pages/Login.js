@@ -34,9 +34,7 @@ class LoginPage extends Component {
   _renderErrorIfAny() {
     const { error } = this.props;
     if (error) {
-      return (
-        <Alert color='danger'>{error}</Alert>
-      );
+      return <Alert color='danger'>{error}</Alert>;
     }
   }
 
@@ -117,7 +115,6 @@ class LoginPage extends Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    attempting: auth.attempting,
     error: auth.error,
     isAuth: auth.isAuth
   };

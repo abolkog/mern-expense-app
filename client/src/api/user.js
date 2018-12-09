@@ -4,6 +4,6 @@ export const apiLogin = request_data => {
   return axios.post('/api/v1/auth', request_data);
 };
 
-export const fetchProfile = () => {
+export const apitFetchProfile = () => {
   return axios.get('/api/v1/me');
 }

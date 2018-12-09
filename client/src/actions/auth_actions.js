@@ -1,18 +1,16 @@
 import {
-  AUTH_ATTEMPTING,
   AUTH_SUCCESS,
   AUTH_FAILED,
   USER_LOGGED_OUT,
   PROFILE_FEATCHED
 } from './types';
-import { apiLogin, fetchProfile } from '../api/user';
+import { apiLogin, apitFetchProfile } from '../api/user';
 import setAuthHeader from '../api/setAuthHeader';
 
 const TOKEN_NAME = 'expense_app_token';
 
 export const signIn = request_data => {
   return async dispatch => {
-    dispatch({ type: AUTH_ATTEMPTING });
     try {
       const {
         data: { token }
@@ -50,7 +48,7 @@ export const getUserProfile = () => {
     try {
       const {
         data: { user }
-      } = await fetchProfile();
+      } = await apitFetchProfile();
       
       dispatch({ type: PROFILE_FEATCHED, payload: user })
     } catch (e) {
