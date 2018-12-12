@@ -59,6 +59,7 @@ export const getUserProfile = () => {
 
 export const logUserOut = () => {
   localStorage.clear();
+  setAuthHeader(null);
   return { type: USER_LOGGED_OUT };
 };
 
