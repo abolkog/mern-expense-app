@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
-import { onLodingSignIn } from './actions';
+import { onLodingSignIn } from './actions/auth_actions';
 
 store.dispatch(onLodingSignIn());
 

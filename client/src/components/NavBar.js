@@ -13,7 +13,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import { logUserOut } from '../actions';
+import { logUserOut } from '../actions/auth_actions';
 
 class NavBarComponent extends Component {
   constructor(props) {
