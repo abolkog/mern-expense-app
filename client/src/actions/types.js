@@ -4,3 +4,6 @@ export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const PROFILE_FEATCHED = 'PROFILE_FEATCHED';
 
 export const EXPENSE_SAVED = 'EXPENSE_SAVED';
+
+export const ADD_ERROR = 'ADD_ERROR';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
