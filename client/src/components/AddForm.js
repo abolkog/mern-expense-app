@@ -11,9 +11,11 @@ import {
   Label,
   FormFeedback
 } from 'reactstrap';
-import { FloatButton } from './FloatButton';
 import moment from 'moment';
 import * as Yup from 'yup';
+
+import { saveExpense } from '../actions/expense_actions';
+import { FloatButton } from './FloatButton';
 
 class AddFormComponent extends Component {
   constructor(props) {
@@ -30,9 +32,20 @@ class AddFormComponent extends Component {
     });
   }
 
-  _onSubmit(values, bag) {
-    console.log(values);
+  componentDidUpdate() {
+    const { saved } = this.props;
+    const { modal } = this.state;
+
+    if (saved && modal ) {
+      this.toggle();
+      this.bag.resetForm();
+    }
   }
+  _onSubmit(values, bag) {
+    this.props.saveExpense(values);
+    this.bag = bag;
+  }
+
   render() {
     const now = moment().format('YYYY-MM-DD');
     return (
@@ -110,5 +123,10 @@ class AddFormComponent extends Component {
   }
 }
 
-const AddForm = connect(null)(AddFormComponent);
+const mapStateToProps = ({ expense }) => {
+   return {
+    saved: expense.saved
+  };
+};
+const AddForm = connect( mapStateToProps , { saveExpense })(AddFormComponent);
 export { AddForm };

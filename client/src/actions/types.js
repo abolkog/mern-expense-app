@@ -2,3 +2,5 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILED = 'AUTH_FAILED';
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const PROFILE_FEATCHED = 'PROFILE_FEATCHED';
+
+export const EXPENSE_SAVED = 'EXPENSE_SAVED';
