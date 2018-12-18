@@ -1,4 +1,4 @@
-import { EXPENSE_SAVED } from './types';
+import { EXPENSE_SAVED, RESET_SAVED_FLAG } from './types';
 import { addErrorMessage, clearErrorMessages } from './error_actions';
 
 import { apiSaveExpense } from '../api/expense';
@@ -14,3 +14,6 @@ export const saveExpense = expense => {
     }
   };
 };
+
+
+export const resetSaved = () => ({ type: RESET_SAVED_FLAG });

@@ -14,7 +14,7 @@ import {
 import moment from 'moment';
 import * as Yup from 'yup';
 
-import { saveExpense } from '../actions/expense_actions';
+import { saveExpense, resetSaved } from '../actions/expense_actions';
 import { FloatButton, ErrorMessage } from '../components';
 
 class AddFormComponent extends Component {
@@ -33,7 +33,7 @@ class AddFormComponent extends Component {
   }
 
   componentDidUpdate() {
-    const { saved, error } = this.props;
+    const { saved, error, resetSaved } = this.props;
     const { modal } = this.state;
 
     if (error) {
@@ -41,6 +41,7 @@ class AddFormComponent extends Component {
     }
 
     if (saved && modal) {
+      resetSaved();
       this.toggle();
       this.bag.resetForm();
     }
@@ -153,6 +154,6 @@ const mapStateToProps = ({ expense, errors }) => {
 };
 const AddForm = connect(
   mapStateToProps,
-  { saveExpense }
+  { saveExpense, resetSaved }
 )(AddFormComponent);
 export { AddForm };
