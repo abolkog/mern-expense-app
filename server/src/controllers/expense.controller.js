@@ -18,7 +18,7 @@ expenseController.get = async (req, res, next) => {
   };
 
   try {
-    const expense = await Expense.find(query);
+    const expense = await Expense.find(query).sort({ created: 'desc' });
     return res.send({
       expense
     });
@@ -52,7 +52,6 @@ expenseController.update = async (req, res, next) => {
   const { amount, description, created } = req.body;
 
   try {
-    
     const check = await Expense.findOne({ _id: expense_id });
     if (!check.owner.equals(req.user._id)) {
       const err = new Error('This exepense object does not belong to you!');
@@ -75,7 +74,7 @@ expenseController.update = async (req, res, next) => {
 
 expenseController.destroy = async (req, res, next) => {
   const expense_id = req.params.expense_id;
-  
+
   const check = await Expense.findOne({ _id: expense_id });
   if (!check.owner.equals(req.user._id)) {
     const err = new Error('This exepense object does not belong to you!');
