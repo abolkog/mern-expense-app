@@ -24,11 +24,8 @@ export const saveExpense = expense => {
 export const fetchExpense = month => {
   return async dispatch => {
     try {
-      const prefix = '/api/v1/expense';
-      const url = month ? `${prefix}/${month}` : prefix;
-
       dispatch({ type: FETCHING_EXPENSE });
-      const { data } = await apiFetchExpense(url);
+      const { data } = await apiFetchExpense(month);
       dispatch({ type: FETCHED_SUCCESS, payload: data.expense });
     } catch (e) {
       dispatch({ type: FETCHED_FAILED });
