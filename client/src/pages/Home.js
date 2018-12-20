@@ -6,6 +6,8 @@ import moment from 'moment';
 import { AddForm, Spinner, ExpenseItem, MonthSelector } from '../components';
 import { fetchExpense } from '../actions/expense_actions';
 
+const MONTHS = moment.months();
+
 class HomeComponent extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +39,7 @@ class HomeComponent extends Component {
     return (
       <div style={{ marginTop: 30 }}>
         <MonthSelector
+          months={MONTHS}
           onSelectMonth={this.onSelectMonth.bind(this)}
           selected={selected}
         />

@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-
-const MONTHS = moment.months();
 
 class MonthSelector extends Component {
   handleMonthChanged(e) {
@@ -10,12 +7,12 @@ class MonthSelector extends Component {
     onSelectMonth(selected);
   }
   render() {
-    const { selected } = this.props;
+    const { selected, months } = this.props;
     return (
       <div style={{ marginBottom: 20 }}>
         <span>Select Month</span>
         <select value={selected} onChange={this.handleMonthChanged.bind(this)}>
-          {MONTHS.map((month, index) => (
+          {months.map((month, index) => (
             <option value={index} key={index}>
               {month}
             </option>
