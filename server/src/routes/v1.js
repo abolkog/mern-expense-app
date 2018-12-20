@@ -26,7 +26,7 @@ router.all('*', (req, res, next) => {
 
 // -------------- Protected Routes -------------- //
 router.get('/me', userController.me);
-router.get('/expense', expenseController.get);
+router.get('/expense/:month?', expenseController.get);
 router.post('/expense', expenseController.create);
 router.put('/expense/:expense_id', expenseController.update);
 router.delete('/expense/:expense_id', expenseController.destroy);

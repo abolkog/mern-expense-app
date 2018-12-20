@@ -6,6 +6,12 @@ expenseController.get = async (req, res, next) => {
   const { user } = req;
 
   const now = new Date();
+
+  const month = parseInt(req.params.month);
+  {
+    month >= 0 && month <= 11 && now.setMonth(month);
+  }
+
   const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
   const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
