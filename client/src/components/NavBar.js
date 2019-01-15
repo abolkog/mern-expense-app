@@ -47,12 +47,21 @@ class NavBarComponent extends Component {
           isOpen={this.state.dropdownOpen}
           toggle={this.toggleButton}
         >
-          <DropdownToggle caret color='link' size='sm'>
-            Welcome, { profile.name }
+          <DropdownToggle
+            caret
+            color="link"
+            size="sm"
+            style={{ color: '#fff' }}
+          >
+            Welcome, {profile.name}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={() => logUserOut() }>
-            Logout</DropdownItem>
+            <DropdownItem
+              style={{ cursor: 'pointer' }}
+              onClick={() => logUserOut()}
+            >
+              Logout
+            </DropdownItem>
           </DropdownMenu>
         </ButtonDropdown>
       );
@@ -60,7 +69,7 @@ class NavBarComponent extends Component {
 
     return (
       <NavItem>
-        <NavLink href='/login'>Login</NavLink>
+        <NavLink href="/login">Login</NavLink>
       </NavItem>
     );
   }
@@ -68,11 +77,11 @@ class NavBarComponent extends Component {
   render() {
     return (
       <div>
-        <Navbar color='dark' dark expand='md'>
-          <NavbarBrand href='/'>MERN Expense</NavbarBrand>
+        <Navbar color="dark" dark expand="md">
+          <NavbarBrand href="/">MERN Expense</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className='ml-auto' navbar>
+            <Nav className="ml-auto" navbar>
               {this._renderLoginOrLogout()}
             </Nav>
           </Collapse>
@@ -89,5 +98,8 @@ const mapStateToProps = ({ auth }) => {
   };
 };
 
-const NavBar = connect(mapStateToProps, { logUserOut })(NavBarComponent);
+const NavBar = connect(
+  mapStateToProps,
+  { logUserOut }
+)(NavBarComponent);
 export { NavBar };
