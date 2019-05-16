@@ -4,7 +4,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -13,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { logUserOut } from '../actions/auth_actions';
 
 class NavBarComponent extends Component {
@@ -69,7 +69,9 @@ class NavBarComponent extends Component {
 
     return (
       <NavItem>
-        <NavLink href="/login">Login</NavLink>
+        <Link style={{ color: '#fff' }} to="/login">
+          Login
+        </Link>
       </NavItem>
     );
   }
@@ -78,7 +80,9 @@ class NavBarComponent extends Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">MERN Expense</NavbarBrand>
+          <Link className="navbar-brand" to="/">
+            MERN Expense
+          </Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
