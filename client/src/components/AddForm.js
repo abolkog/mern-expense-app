@@ -40,7 +40,7 @@ class AddFormComponent extends Component {
     const { saved, error, resetSaved, fetchExpense } = this.props;
     const { modal } = this.state;
 
-    if (error) {
+    if (error && this.bag) {
       this.bag.setSubmitting(false);
     }
 
@@ -61,7 +61,7 @@ class AddFormComponent extends Component {
     return (
       <div>
         <FloatButton onClick={this.toggle} />
-        <Modal isOpen={this.state.modal} toggle={this.toggle} size='lg'>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} size="lg">
           <ModalHeader toggle={this.toggle}>Add Expense</ModalHeader>
           <ModalBody>
             <Formik
@@ -90,10 +90,10 @@ class AddFormComponent extends Component {
                     <Label>Description</Label>
                     <Input
                       invalid={errors.description && touched.description}
-                      name='description'
-                      type='string'
+                      name="description"
+                      type="string"
                       value={values.description}
-                      placeholder='Enter Expesne description'
+                      placeholder="Enter Expesne description"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -106,10 +106,10 @@ class AddFormComponent extends Component {
                     <Label>Amount</Label>
                     <Input
                       invalid={errors.amount && touched.amount}
-                      name='amount'
-                      type='number'
+                      name="amount"
+                      type="number"
                       value={values.amount}
-                      placeholder='Enter Expesne Amount'
+                      placeholder="Enter Expesne Amount"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -122,10 +122,10 @@ class AddFormComponent extends Component {
                     <Label>Date</Label>
                     <Input
                       invalid={errors.created && touched.created}
-                      name='created'
-                      type='date'
+                      name="created"
+                      type="date"
                       value={values.created}
-                      placeholder='Enter Expesne Amount'
+                      placeholder="Enter Expesne Amount"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -135,7 +135,7 @@ class AddFormComponent extends Component {
                   </FormGroup>
 
                   <Button
-                    color='primary'
+                    color="primary"
                     onClick={handleSubmit}
                     disabled={!isValid || isSubmitting}
                   >
