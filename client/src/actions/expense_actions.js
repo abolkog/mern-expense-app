@@ -3,11 +3,16 @@ import {
   RESET_SAVED_FLAG,
   FETCHING_EXPENSE,
   FETCHED_SUCCESS,
-  FETCHED_FAILED
+  FETCHED_FAILED,
+  EXPENSE_UPDATED
 } from './types';
 import { addErrorMessage, clearErrorMessages } from './error_actions';
 
-import { apiSaveExpense, apiFetchExpense } from '../api/expense';
+import {
+  apiSaveExpense,
+  apiFetchExpense,
+  apiUpdateExpense
+} from '../api/expense';
 
 export const saveExpense = expense => {
   return async dispatch => {
@@ -15,6 +20,18 @@ export const saveExpense = expense => {
       dispatch(clearErrorMessages());
       await apiSaveExpense(expense);
       dispatch({ type: EXPENSE_SAVED });
+    } catch (e) {
+      dispatch(addErrorMessage(e));
+    }
+  };
+};
+
+export const updateExpense = expense => {
+  return async dispatch => {
+    try {
+      dispatch(clearErrorMessages());
+      await apiUpdateExpense(expense);
+      dispatch({ type: EXPENSE_UPDATED });
     } catch (e) {
       dispatch(addErrorMessage(e));
     }

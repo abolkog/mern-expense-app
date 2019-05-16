@@ -3,10 +3,12 @@ import {
   RESET_SAVED_FLAG,
   FETCHED_FAILED,
   FETCHED_SUCCESS,
-  FETCHING_EXPENSE
+  FETCHING_EXPENSE,
+  EXPENSE_UPDATED
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  updated: false,
   saved: false,
   fetching: false,
   expense: []
@@ -22,8 +24,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, fetching: false };
     case EXPENSE_SAVED:
       return { ...state, saved: true };
+    case EXPENSE_UPDATED:
+      return { ...state, updated: true };
     case RESET_SAVED_FLAG:
-      return { ...state, saved: false };
+      return { ...state, saved: false, updated: false };
     default:
       return state;
   }

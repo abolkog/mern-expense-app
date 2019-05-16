@@ -4,6 +4,10 @@ export const apiSaveExpense = expense => {
   return axios.post('/api/v1/expense', expense);
 };
 
+export const apiUpdateExpense = expense => {
+  return axios.put(`/api/v1/expense/${expense._id}`, expense);
+};
+
 export const apiFetchExpense = month => {
   const prefix = '/api/v1/expense';
   const url = month ? `${prefix}/${month}` : prefix;

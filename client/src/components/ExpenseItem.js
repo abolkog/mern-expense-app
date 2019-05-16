@@ -1,17 +1,29 @@
 import React from 'react';
 import { ListGroupItem, Badge } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
+
 const ExpenseItem = ({ item }) => {
   return (
     <ListGroupItem>
-      <div className='float-left'>
+      <div className="float-left">
         <span style={{ marginRight: 5 }}>
           {item.description ? item.description : 'Expense Item'}
         </span>
-        <Badge color='dark'>${item.amount}</Badge>
-        <div className='text-muted'>{moment(item.created).format('LL')}</div>
+        <Badge color="dark">${item.amount}</Badge>
+        <div className="text-muted">{moment(item.created).format('LL')}</div>
       </div>
-      <div className='float-right'> Right</div>
+      <div className="float-right">
+        <Link
+          to={{
+            pathname: '/edit',
+            state: { item }
+          }}
+          className="btn btn-secondary btn-sm"
+        >
+          Edit
+        </Link>
+      </div>
     </ListGroupItem>
   );
 };
