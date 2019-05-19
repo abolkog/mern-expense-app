@@ -1,9 +1,9 @@
 import React from 'react';
-import { ListGroupItem, Badge } from 'reactstrap';
+import { ListGroupItem, Badge, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-const ExpenseItem = ({ item }) => {
+const ExpenseItem = ({ item, onDelete }) => {
   return (
     <ListGroupItem>
       <div className="float-left">
@@ -23,6 +23,10 @@ const ExpenseItem = ({ item }) => {
         >
           Edit
         </Link>
+        &nbsp;
+        <Button color="danger" size="sm" onClick={onDelete} data-id={item._id}>
+          Delete
+        </Button>
       </div>
     </ListGroupItem>
   );

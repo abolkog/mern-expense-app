@@ -4,7 +4,7 @@ import { ListGroup } from 'reactstrap';
 import moment from 'moment';
 
 import { AddForm, Spinner, ExpenseItem, MonthSelector } from '../components';
-import { fetchExpense } from '../actions/expense_actions';
+import { fetchExpense, deleteExpense } from '../actions/expense_actions';
 
 const MONTHS = moment.months();
 
@@ -14,6 +14,7 @@ class HomeComponent extends Component {
     this.state = {
       selected: moment().month()
     };
+    this.onDelete = this.onDelete.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,13 @@ class HomeComponent extends Component {
     const { fetchExpense } = this.props;
     fetchExpense(month);
   }
+
+  onDelete(e) {
+    const expenseId = e.target.attributes.getNamedItem('data-id').value;
+    const { deleteExpense } = this.props;
+    deleteExpense(expenseId);
+  }
+
   render() {
     const { selected } = this.state;
     const { fetching, expense } = this.props;
@@ -48,7 +56,7 @@ class HomeComponent extends Component {
 
         <ListGroup>
           {expense.map(item => (
-            <ExpenseItem key={item._id} item={item} />
+            <ExpenseItem key={item._id} item={item} onDelete={this.onDelete} />
           ))}
         </ListGroup>
         <AddForm />
@@ -65,6 +73,6 @@ const mapStateToProps = ({ expense }) => {
 };
 const Home = connect(
   mapStateToProps,
-  { fetchExpense }
+  { fetchExpense, deleteExpense }
 )(HomeComponent);
 export { Home };

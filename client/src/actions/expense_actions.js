@@ -11,7 +11,8 @@ import { addErrorMessage, clearErrorMessages } from './error_actions';
 import {
   apiSaveExpense,
   apiFetchExpense,
-  apiUpdateExpense
+  apiUpdateExpense,
+  apiDeleteExpense
 } from '../api/expense';
 
 export const saveExpense = expense => {
@@ -46,6 +47,18 @@ export const fetchExpense = month => {
       dispatch({ type: FETCHED_SUCCESS, payload: data.expense });
     } catch (e) {
       dispatch({ type: FETCHED_FAILED });
+      dispatch(addErrorMessage(e));
+    }
+  };
+};
+
+export const deleteExpense = expenseId => {
+  return async dispatch => {
+    try {
+      dispatch(clearErrorMessages());
+      await apiDeleteExpense(expenseId);
+      dispatch(fetchExpense());
+    } catch (e) {
       dispatch(addErrorMessage(e));
     }
   };
