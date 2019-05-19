@@ -44,7 +44,7 @@ export const fetchExpense = month => {
     try {
       dispatch({ type: FETCHING_EXPENSE });
       const { data } = await apiFetchExpense(month);
-      dispatch({ type: FETCHED_SUCCESS, payload: data.expense });
+      dispatch({ type: FETCHED_SUCCESS, payload: data });
     } catch (e) {
       dispatch({ type: FETCHED_FAILED });
       dispatch(addErrorMessage(e));

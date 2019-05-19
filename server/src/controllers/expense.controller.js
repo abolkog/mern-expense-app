@@ -25,8 +25,24 @@ expenseController.get = async (req, res, next) => {
 
   try {
     const expense = await Expense.find(query).sort({ created: 'desc' });
+    const statistics = {};
+
+    if (expense.length > 0) {
+      //Max amount spent in the specified month
+      statistics.max = expense.sort((a, b) => a.amount < b.amount)[0].amount;
+
+      //Total amount spent in the specified month
+      statistics.total = expense
+        .map(item => item.amount)
+        .reduce((prev, next) => prev + next);
+
+      //Avg expense for the given month
+      statistics.avg = Math.floor(statistics.total / expense.length);
+    }
+
     return res.send({
-      expense
+      expense,
+      statistics
     });
   } catch (e) {
     next(e);

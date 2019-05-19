@@ -11,7 +11,8 @@ const INITIAL_STATE = {
   updated: false,
   saved: false,
   fetching: false,
-  expense: []
+  expense: [],
+  statistics: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,7 +20,8 @@ export default (state = INITIAL_STATE, action) => {
     case FETCHING_EXPENSE:
       return { ...state, fetching: true };
     case FETCHED_SUCCESS:
-      return { ...state, fetching: false, expense: action.payload };
+      const { expense, statistics } = action.payload;
+      return { ...state, fetching: false, expense, statistics };
     case FETCHED_FAILED:
       return { ...state, fetching: false };
     case EXPENSE_SAVED:

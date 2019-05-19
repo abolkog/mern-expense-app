@@ -7,3 +7,4 @@ export * from './ExpenseItem';
 export * from './Spinner';
 export * from './MonthSelector';
 export * from './FormBody';
+export * from './Statistics';

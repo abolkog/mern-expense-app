@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
 import moment from 'moment';
 
-import { AddForm, Spinner, ExpenseItem, MonthSelector } from '../components';
+import {
+  AddForm,
+  Spinner,
+  ExpenseItem,
+  MonthSelector,
+  Statistics
+} from '../components';
 import { fetchExpense, deleteExpense } from '../actions/expense_actions';
 
 const MONTHS = moment.months();
@@ -39,7 +45,7 @@ class HomeComponent extends Component {
 
   render() {
     const { selected } = this.state;
-    const { fetching, expense } = this.props;
+    const { fetching, expense, statistics } = this.props;
     if (fetching) {
       return <Spinner />;
     }
@@ -52,6 +58,9 @@ class HomeComponent extends Component {
           selected={selected}
         />
         <h3>Expense List</h3>
+        <hr />
+
+        <Statistics data={statistics} />
         <hr />
 
         <ListGroup>
@@ -68,7 +77,8 @@ class HomeComponent extends Component {
 const mapStateToProps = ({ expense }) => {
   return {
     fetching: expense.fetching,
-    expense: expense.expense
+    expense: expense.expense,
+    statistics: expense.statistics
   };
 };
 const Home = connect(
