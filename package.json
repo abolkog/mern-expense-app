@@ -5,7 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "npm run dev --prefix server",
-    "client": "npm start --prefix client"
+    "client": "npm start --prefix client",
+    "install": "npm install --prefix server && npm install --prefix client",
+    "start": "npm start --prefix server",
+    "heroku-postbuild": "npm run build --prefix client"
   },
   "repository": {
     "type": "git",
