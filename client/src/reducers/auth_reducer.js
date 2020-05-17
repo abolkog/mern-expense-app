@@ -2,13 +2,15 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   USER_LOGGED_OUT,
-  PROFILE_FEATCHED
+  PROFILE_FEATCHED,
+  SIGNUP_SUCCESS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   isAuth: false,
   profile: {},
-  error: null
+  error: null,
+  signedUp: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,12 +21,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isAuth: false,
-        error: action.payload
+        error: action.payload,
       };
     case USER_LOGGED_OUT:
       return { ...state, isAuth: false, profile: {} };
     case PROFILE_FEATCHED:
       return { ...state, profile: action.payload };
+    case SIGNUP_SUCCESS:
+      return { ...state, error: null, signedUp: true };
     default:
       return state;
   }

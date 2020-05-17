@@ -2,25 +2,40 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   USER_LOGGED_OUT,
-  PROFILE_FEATCHED
+  PROFILE_FEATCHED,
+  SIGNUP_SUCCESS,
 } from './types';
-import { apiLogin, apitFetchProfile } from '../api/user';
+import { apiLogin, apitFetchProfile, apiSignUp } from '../api/user';
 import setAuthHeader from '../api/setAuthHeader';
 
 const TOKEN_NAME = 'expense_app_token';
+
+export const signUp = request_data => {
+  return async dispatch => {
+    try {
+      await apiSignUp(request_data);
+      dispatch({ type: SIGNUP_SUCCESS });
+    } catch (e) {
+      const {
+        response: { data },
+      } = e;
+      dispatch(error(data.error));
+    }
+  };
+};
 
 export const signIn = request_data => {
   return async dispatch => {
     try {
       const {
-        data: { token }
+        data: { token },
       } = await apiLogin(request_data);
       setAuthHeader(token);
       dispatch(getUserProfile());
       dispatch(success(token));
     } catch (e) {
       const {
-        response: { data }
+        response: { data },
       } = e;
       dispatch(error(data.error));
     }
@@ -32,7 +47,7 @@ export const onLodingSignIn = () => {
     try {
       const token = localStorage.getItem(TOKEN_NAME);
       if (token === null || token === 'undefined') {
-        return dispatch(error('You need to login '));
+        return dispatch(error(''));
       }
       setAuthHeader(token);
       dispatch(getUserProfile());
@@ -47,10 +62,10 @@ export const getUserProfile = () => {
   return async dispatch => {
     try {
       const {
-        data: { user }
+        data: { user },
       } = await apitFetchProfile();
-      
-      dispatch({ type: PROFILE_FEATCHED, payload: user })
+
+      dispatch({ type: PROFILE_FEATCHED, payload: user });
     } catch (e) {
       console.error(e);
     }
