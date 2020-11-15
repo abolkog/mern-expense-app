@@ -37,6 +37,9 @@ require('./config/passport')(passport);
 // ----------- Routes -----------//
 app.use('/api/v1', v1);
 
+// ----------- Public Images -----------//
+app.use(express.static('public'));
+
 // ----------- Static Files -----------//
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../client/build')));

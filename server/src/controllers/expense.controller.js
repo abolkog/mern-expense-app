@@ -19,8 +19,8 @@ expenseController.get = async (req, res, next) => {
     owner: user._id,
     created: {
       $gte: firstDay,
-      $lt: lastDay
-    }
+      $lt: lastDay,
+    },
   };
 
   try {
@@ -33,7 +33,7 @@ expenseController.get = async (req, res, next) => {
 
       //Total amount spent in the specified month
       statistics.total = expense
-        .map(item => item.amount)
+        .map((item) => item.amount)
         .reduce((prev, next) => prev + next);
 
       //Avg expense for the given month
@@ -42,7 +42,7 @@ expenseController.get = async (req, res, next) => {
 
     return res.send({
       expense,
-      statistics
+      statistics,
     });
   } catch (e) {
     next(e);
@@ -51,18 +51,20 @@ expenseController.get = async (req, res, next) => {
 
 expenseController.create = async (req, res, next) => {
   const { amount, description, created } = req.body;
+  const { file } = req;
   const newExpense = new Expense({
     amount,
     description,
     created,
-    owner: req.user
+    owner: req.user,
+    receipt: (file && file.filename) || null,
   });
 
   try {
     const saved = await newExpense.save();
     return res.send({
       success: true,
-      expense: saved
+      expense: saved,
     });
   } catch (e) {
     next(e);
@@ -87,7 +89,7 @@ expenseController.update = async (req, res, next) => {
     );
     return res.send({
       success: true,
-      expense
+      expense,
     });
   } catch (e) {
     next(e);
@@ -107,7 +109,7 @@ expenseController.destroy = async (req, res, next) => {
   try {
     await Expense.deleteOne({ _id: expense_id });
     res.send({
-      success: true
+      success: true,
     });
   } catch (e) {
     next(e);

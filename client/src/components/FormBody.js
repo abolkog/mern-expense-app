@@ -14,24 +14,23 @@ const FormBody = ({ btnTxt = 'Save Expense', onSubmit, expense = {} }) => {
     : moment().format('YYYY-MM-DD');
   return (
     <Formik
-      initialValues={{ amount, created: now, description }}
+      initialValues={{ amount, created: now, description, receipt: undefined }}
       onSubmit={onSubmit}
       validationSchema={Yup.object().shape({
-        amount: Yup.number()
-          .min(1)
-          .required(),
+        amount: Yup.number().min(1).required(),
         description: Yup.string().min(3),
-        created: Yup.date().required()
+        created: Yup.date().required(),
       })}
       render={({
         errors,
         touched,
         handleBlur,
         handleChange,
+        setFieldValue,
         values,
         handleSubmit,
         isValid,
-        isSubmitting
+        isSubmitting,
       }) => (
         <div>
           <ErrorMessage />
@@ -81,6 +80,15 @@ const FormBody = ({ btnTxt = 'Save Expense', onSubmit, expense = {} }) => {
             {errors.created && touched.created && (
               <FormFeedback>{errors.created}</FormFeedback>
             )}
+          </FormGroup>
+
+          <FormGroup>
+            <Label>Receipt (optional)</Label>
+            <Input
+              name="receipt"
+              type="file"
+              onChange={(e) => setFieldValue('receipt', e.target.files[0])}
+            />
           </FormGroup>
 
           <Button

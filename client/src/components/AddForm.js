@@ -5,7 +5,7 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import {
   saveExpense,
   resetSaved,
-  fetchExpense
+  fetchExpense,
 } from '../actions/expense_actions';
 import { FloatButton, FormBody } from '../components';
 
@@ -13,7 +13,7 @@ class AddFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -21,7 +21,7 @@ class AddFormComponent extends Component {
   }
   toggle() {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
     });
   }
 
@@ -42,7 +42,9 @@ class AddFormComponent extends Component {
   }
 
   onSubmit(values, bag) {
-    this.props.saveExpense(values);
+    const formData = new FormData();
+    Object.keys(values).forEach((key) => formData.append(key, values[key]));
+    this.props.saveExpense(formData);
     this.bag = bag;
   }
 
@@ -64,11 +66,12 @@ class AddFormComponent extends Component {
 const mapStateToProps = ({ expense, errors }) => {
   return {
     saved: expense.saved,
-    error: errors.message
+    error: errors.message,
   };
 };
-const AddForm = connect(
-  mapStateToProps,
-  { saveExpense, resetSaved, fetchExpense }
-)(AddFormComponent);
+const AddForm = connect(mapStateToProps, {
+  saveExpense,
+  resetSaved,
+  fetchExpense,
+})(AddFormComponent);
 export { AddForm };
